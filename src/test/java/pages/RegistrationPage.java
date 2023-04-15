@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import enums.*;
-import org.junit.jupiter.api.Test;
 import pages.components.CalendarComponent;
 import pages.components.ModalDialog;
 
@@ -95,14 +94,6 @@ public class RegistrationPage {
         return this;
     }
 
-
-    @Test
-    void t() {
-        System.out.println("==========================");
-        System.out.println(State.Rajasthan.toString());
-        System.out.println(State.valueOf("Rajasthan"));
-        System.out.println("============================");
-    }
 
     public RegistrationPage chooseCity(String cityName) {
         cityButton.click();
