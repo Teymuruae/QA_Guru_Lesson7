@@ -8,7 +8,9 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ModalDialog {
 
-    private SelenideElement textToWaitForAfterSubmit = $(".modal-title"),
+    private String textInModalWindow = "Thanks for submitting the form";
+    private SelenideElement
+            textToWaitForAfterSubmit = $(".modal-title"),
             modalDialog = $(".modal-dialog.modal-lg");
 
     public void verifyElements(String key, String value) {
@@ -18,7 +20,7 @@ public class ModalDialog {
 
     public void verifyModalAppear() {
         modalDialog.should(Condition.appear);
-        textToWaitForAfterSubmit.shouldHave(Condition.text("Thanks for submitting the form"));
+        textToWaitForAfterSubmit.shouldHave(Condition.text(textInModalWindow));
 
 
     }

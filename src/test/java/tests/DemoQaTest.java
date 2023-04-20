@@ -1,43 +1,62 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import enums.*;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
+import java.util.Locale;
+
 
 public class DemoQaTest extends TestBase {
 
+    private Faker faker = new Faker();
+
+    private String city = "Karnal";
+    private String firstName = faker.name().firstName();
+    private String lastName = faker.name().lastName();
+    private String email = faker.internet().emailAddress();
+    private String phoneNumber =    Long.toString(faker.number().randomNumber(10,true));
+    private String textAreaText = faker.address().toString();
+    private String imageToUploadPath = "img/test.png";
+    private String birthDay = Integer.toString(faker.number().numberBetween(1, 28));
+    private String birthYear = Integer.toString(faker.number().numberBetween(1990,2005));
+    private String expectedUploadFileName = "test.png";
     private RegistrationPage registrationPage = new RegistrationPage();
     private ModalDialogFields key = new ModalDialogFields();
 
+
     @Test
     public void fillFormTest() {
-        registrationPage.openPage()
-                .fillFirstNameField("Ivan")
-                .fillLastNameField("Ivanov")
-                .fillEmailField("IvIvan@test.ru")
-                .fillPhoneNumberField("8800555353")
+        registrationPage
+                .openPage()
+                .fillFirstNameField(firstName)
+                .fillLastNameField(lastName)
+                .fillEmailField(email)
+                .fillPhoneNumberField(phoneNumber)
                 .setGender(Gender.MALE)
                 .chooseSubject(Subject.COMMERCE)
                 .chooseState(State.HARYANA)
-                .chooseCity("Karnal")
-                .fillTextArea("some text for test")
+                .chooseCity(city)
+                .fillTextArea(textAreaText)
                 .chooseHobby(Hobby.MUSIC)
-                .uploadImage("img/test.png")
-                .setBirthDate("3", Months.OCTOBER, "1990")
+                .uploadImage(imageToUploadPath)
+                .setBirthDate(birthDay, Months.OCTOBER, birthYear)
                 .clickSubmitButton();
         registrationPage
-                .verifyModalDialogApper()
-                .verifyModalDialogsElements(key.getStudenName(), "Ivan Ivanov")
-                .verifyModalDialogsElements(key.getStudentEmail(), "IvIvan@test.ru")
-                .verifyModalDialogsElements(key.getMobile(), "8800555353")
-                .verifyModalDialogsElements(key.getDateOfBirth(), String.format( "3 %s,1990", Months.OCTOBER.toString()))
+                .verifyModalDialogAppear()
+                .verifyModalDialogsElements(key.getStudenName(), firstName + " " + lastName)
+                .verifyModalDialogsElements(key.getStudentEmail(), email)
+                .verifyModalDialogsElements(key.getMobile(), phoneNumber)
+                .verifyModalDialogsElements(key.getDateOfBirth(), String
+                        .format( "%s %s,%s", birthDay, Months.OCTOBER.toString(), birthYear))
                 .verifyModalDialogsElements(key.getGender(), Gender.MALE.toString())
                 .verifyModalDialogsElements(key.getSubjects(), Subject.COMMERCE.toString())
-                .verifyModalDialogsElements(key.getStateAndCity(), String.format("%s %s",State.HARYANA.toString(), "Karnal"  ))
+                .verifyModalDialogsElements(key.getStateAndCity(), String
+                        .format("%s %s",State.HARYANA.toString(), city  ))
                 .verifyModalDialogsElements(key.getHobbies(), Hobby.MUSIC.toString())
-                .verifyModalDialogsElements(key.getPicture(), "test.png")
-                .verifyModalDialogsElements(key.getAddress(),"some text for test");
+                .verifyModalDialogsElements(key.getPicture(), expectedUploadFileName)
+                .verifyModalDialogsElements(key.getAddress(), textAreaText);
 
 
     }

@@ -16,6 +16,7 @@ public class RegistrationPage {
     private ModalDialog modalDialog = new ModalDialog();
 
     private CalendarComponent calendar = new CalendarComponent();
+    private String textOnRegistrationForm = "Student Registration Form";
     private SelenideElement firstNameField = $("#firstName"),
             lastNameField = $("#lastName"),
             emailField = $("#userEmail"),
@@ -23,7 +24,7 @@ public class RegistrationPage {
             phoneNumberField = $("#userNumber"),
             birthDateField = $("#dateOfBirthInput"),
 
-    subject = $("#subjectsInput"),
+            subject = $("#subjectsInput"),
             textArea = $("#currentAddress"),
             stateButton = $("#state"),
             cityButton = $("#city"),
@@ -48,7 +49,7 @@ public class RegistrationPage {
 
     public RegistrationPage openPage() {
         Selenide.open(registrationPageUri);
-        textToWaitForOnPage.shouldHave(Condition.text("Student Registration Form"));
+        textToWaitForOnPage.shouldHave(Condition.text(textOnRegistrationForm));
         Selenide.executeJavaScript("$('footer').remove()");
         return this;
     }
@@ -123,7 +124,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage verifyModalDialogApper() {
+    public RegistrationPage verifyModalDialogAppear() {
         modalDialog.verifyModalAppear();
         return this;
     }
