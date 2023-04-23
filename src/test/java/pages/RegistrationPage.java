@@ -33,16 +33,16 @@ public class RegistrationPage {
             textToWaitForOnPage = $("h5");
 
 
-    private SelenideElement getStateLocator(State value) {
-        return $(Selectors.byTagAndText("div", value.toString()));
+    private SelenideElement getStateLocator(String value) {
+        return $(Selectors.byTagAndText("div", value));
     }
 
     private SelenideElement getCityLocator(String cityName) {
         return $(Selectors.byTagAndText("div", cityName));
     }
 
-    private SelenideElement getHobbyCheckBoxLocator(Hobby hobby) {
-        return $x(String.format("//label[text() = '%s']", hobby.toString()));
+    private SelenideElement getHobbyCheckBoxLocator(String hobby) {
+        return $x(String.format("//label[text() = '%s']", hobby));
     }
 
 // act methods
@@ -69,8 +69,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setGender(Gender value) {
-        genderRadio.$(Selectors.byText(value.toString())).click();
+    public RegistrationPage setGender(String value) {
+        genderRadio.$(Selectors.byText(value)).click();
         return this;
     }
 
@@ -79,8 +79,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage chooseSubject(Subject subjectValue) {
-        subject.setValue(subjectValue.toString()).pressEnter();
+    public RegistrationPage chooseSubject(String subjectValue) {
+        subject.setValue(subjectValue).pressEnter();
         return this;
     }
 
@@ -89,7 +89,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage chooseState(State stateValue) {
+    public RegistrationPage chooseState(String stateValue) {
         stateButton.click();
         getStateLocator(stateValue).click();
         return this;
@@ -102,7 +102,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage chooseHobby(Hobby hobby) {
+    public RegistrationPage chooseHobby(String hobby) {
         getHobbyCheckBoxLocator(hobby).click();
         return this;
     }
@@ -118,7 +118,7 @@ public class RegistrationPage {
 
     }
 
-    public RegistrationPage setBirthDate(String day, Months month, String year) {
+    public RegistrationPage setBirthDate(String day, String month, String year) {
         birthDateField.click();
         calendar.setDate(day, month, year);
         return this;
@@ -131,6 +131,11 @@ public class RegistrationPage {
 
     public RegistrationPage verifyModalDialogsElements(String key, String value) {
         modalDialog.verifyElements(key, value);
+        return this;
+    }
+    public RegistrationPage removeDomElements(){
+        Selenide.executeJavaScript("$('#fixedban').remove()");
+        Selenide.executeJavaScript("$('footer').remove()");
         return this;
     }
 

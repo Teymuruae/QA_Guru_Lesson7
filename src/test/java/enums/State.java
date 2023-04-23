@@ -1,7 +1,7 @@
 package enums;
 
 public enum State {
-    HARYANA, RAJASTHAN;
+    HARYANA, RAJASTHAN, NCR;
 
     @Override
     public String toString(){

@@ -2,6 +2,8 @@ package pages.components;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.junit.jupiter.api.Test;
+import testdata.TestData;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -24,4 +26,5 @@ public class ModalDialog {
 
 
     }
+
 }

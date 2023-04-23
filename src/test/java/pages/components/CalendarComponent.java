@@ -14,8 +14,8 @@ public class CalendarComponent {
                     = $(".react-datepicker__year-select"),
             dayLocator = $x("//div[@role = 'option' and text() = 20]");
 
-    public void setDate(String day, Months month, String year){
-        monthLocator.selectOption(month.toString());
+    public void setDate(String day, String month, String year){
+        monthLocator.selectOption(month);
         yearLocator.selectOption(year);
         $x(String.format("//div[ not(contains(@class, 'day--outside-month')) and @role = 'option' and text() = %s]",
                 day)).click();

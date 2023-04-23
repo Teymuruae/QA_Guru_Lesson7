@@ -14,7 +14,7 @@ public class TestBase {
         Configuration.baseUrl = baseUrl;
         Configuration.browserSize = browserSize;
 //        Configuration.pageLoadTimeout = 15000;
-        Configuration.browser = "fireFox";
+//        Configuration.browser = "fireFox";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = true;
     }
