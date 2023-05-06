@@ -26,8 +26,10 @@ public class TestData {
     public static String subject = faker.options().option(Subject.ENGLISH.toString(),Subject.CHEMISTRY.toString(),
             Subject.COMMERCE.toString() );
 
-    public static String state = faker.options().option(State.NCR.toString(),
+    public static String state = faker.options().option(State.NCR.toString().toUpperCase(),
             "Uttar Pradesh", State.HARYANA.toString(), State.RAJASTHAN.toString());
+
+
 
     public static String city(){
         String cityName;

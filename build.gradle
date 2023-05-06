@@ -1,23 +1,69 @@
 plugins {
     id 'java'
+    id("io.qameta.allure") version "2.11.2"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+def jUnitVersion = "5.8.1",
+    selenideVersion = "6.13.0",
+    javaFakerVersion = "1.0.2",
+    allureSelenideVersion = "2.21.0"
+
 repositories {
     mavenCentral()
 }
 
+compileJava {
+    options.encoding = 'UTF-8'
+}
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+allure {
+    report {
+        version.set("2.17.3") //версия Allure Report (https://github.com/allure-framework/allure2)
+    }
+    adapter {
+        aspectjWeaver.set(true) // обработка аннотации @Step
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.17.3") //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
+            }
+        }
+    }
+}
+
+
 dependencies {
     testImplementation (
-            'org.junit.jupiter:junit-jupiter-api:5.8.1',
-            "com.codeborne:selenide:6.13.0",
-            'com.github.javafaker:javafaker:1.0.2'
+            "org.junit.jupiter:junit-jupiter-api:$jUnitVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "com.github.javafaker:javafaker:$javaFakerVersion",
+            "io.qameta.allure:allure-selenide:$allureSelenideVersion",
+
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+tasks.withType(Test) {
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+
 test {
     useJUnitPlatform()
+}
+
+task remote_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("remote")
+    }
 }

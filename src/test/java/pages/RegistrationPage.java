@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import enums.*;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.ModalDialog;
 
@@ -46,6 +47,7 @@ public class RegistrationPage {
     }
 
 // act methods
+
 
     public RegistrationPage openPage() {
         Selenide.open(registrationPageUri);
