@@ -43,7 +43,8 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "com.github.javafaker:javafaker:$javaFakerVersion",
             "io.qameta.allure:allure-selenide:$allureSelenideVersion",
-            'io.github.bonigarcia:webdrivermanager:5.3.2'
+            'io.github.bonigarcia:webdrivermanager:5.3.2',
+            "org.slf4j:slf4j-simple:2.0.7"
 
     )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
