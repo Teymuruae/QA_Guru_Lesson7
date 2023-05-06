@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,6 +16,7 @@ public class TestBase {
     private static String browserSize = "1920x1080";
     @BeforeAll
     public static void beforeAll(){
+        WebDriverManager.chromedriver().setup();
         Configuration.baseUrl = baseUrl;
         Configuration.browserSize = browserSize;
 //        Configuration.pageLoadTimeout = 15000;
