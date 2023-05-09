@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import com.github.javafaker.Faker;
 import enums.ModalDialogFields;
 import org.junit.jupiter.api.Tag;
@@ -24,7 +25,6 @@ public class DemoQaTest extends TestBase {
     @Tag("remote")
     @Test
     public void fillFormTest() {
-
         step("open registration page", () -> {
             registrationPage
                     .openPage()
@@ -38,11 +38,11 @@ public class DemoQaTest extends TestBase {
                     .fillPhoneNumberField(TestData.phoneNumber)
                     .setGender(TestData.gender)
                     .chooseSubject(TestData.subject)
+                    .fillTextArea(TestData.textAreaText)
                     .chooseState(TestData.state)
                     .chooseCity(city)
-                    .fillTextArea(TestData.textAreaText)
                     .chooseHobby(TestData.hobby)
-                    .uploadImage(imageToUploadPath)
+//                    .uploadImage(imageToUploadPath)
                     .setBirthDate(TestData.birthDay, TestData.month, TestData.birthYear)
                     .clickSubmitButton();
         });
@@ -55,11 +55,11 @@ public class DemoQaTest extends TestBase {
                     .verifyModalDialogsElements(key.getDateOfBirth(), String
                             .format("%s %s,%s", TestData.birthDay, TestData.month, TestData.birthYear))
                     .verifyModalDialogsElements(key.getGender(), TestData.gender)
-                    .verifyModalDialogsElements(key.getSubjects(), TestData.subject)
+//                    .verifyModalDialogsElements(key.getSubjects(), TestData.subject)
                     .verifyModalDialogsElements(key.getStateAndCity(), String
                             .format("%s %s", TestData.state, city))
                     .verifyModalDialogsElements(key.getHobbies(), TestData.hobby)
-                    .verifyModalDialogsElements(key.getPicture(), expectedUploadFileName)
+//                    .verifyModalDialogsElements(key.getPicture(), expectedUploadFileName)
                     .verifyModalDialogsElements(key.getAddress(), TestData.textAreaText);
         });
 

@@ -82,7 +82,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage chooseSubject(String subjectValue) {
-        subject.setValue(subjectValue).pressEnter();
+        subject.setValue(subjectValue).pressTab();
         return this;
     }
 
